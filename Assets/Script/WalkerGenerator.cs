@@ -8,8 +8,8 @@ public class WalkerGenerator : MonoBehaviour
     public GameObject walker;
   /*  public GameObject walker;
     public GameObject walker;
-    public GameObject walker;
-    private int peaple;*/
+    public GameObject walker;*/
+    private int peaple = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,30 +19,24 @@ public class WalkerGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if(peaple <= 5)
+        if(peaple <= 5)
         {
          GameObject item;
-         int dice = Random.Range(0, 20);
+         int dice = Random.Range(0, 1);
          if(dice == 0)
          {
-            //‚Î‚ ‚¿‚á‚ñ
+            //”Æß•às
             item = Instantiate(criminal);
          }
-         else if(dice <= 6)
+         else 
          {
                 //•àsŽÒ
             item = Instantiate(walker);
          }
-         else if(dice <= 11)
-         {
-                //”Æß•às
-         }
+     
             this.peaple++;
 
-            float x = Random.Range(10, 50);
-            float z = Random.Range(20, 30);
-            item.transform.position = new Vector3(x, 0.5f, z);
-           }*/
+        }
       
      
     }
