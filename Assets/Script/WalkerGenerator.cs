@@ -21,11 +21,11 @@ public class WalkerGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(peaple <= 5)
+        if(peaple < 50)
         {
          GameObject item;
-         int dice = Random.Range(0, 2);
-         if(dice == 0)
+         int dice = Random.Range(0, 21);
+         if(dice % 2 == 0)
          {
             //”Æß•às
             item = Instantiate(criminal_);
@@ -36,7 +36,7 @@ public class WalkerGenerator : MonoBehaviour
             item = Instantiate(walker_);
          }
 
-            int ranSpawn = Random.Range(0, 9);
+            int ranSpawn = Random.Range(0, 10);
             item.transform.position = spawn_[ranSpawn].position;
             this.peaple++;
 

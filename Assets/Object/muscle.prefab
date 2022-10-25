@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2540828936935016561}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 35.773, y: 0.5, z: 19.999}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -119,7 +119,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 0.020097982
   m_BaseOffset: 0.010048991
-  m_WalkableMask: 17
+  m_WalkableMask: 48
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3423790857571118024
 MonoBehaviour:
@@ -134,5 +134,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints:
-  - {fileID: 3082083685281676659, guid: 3ed8ceaf2117f4b45bc84b2151e924e6, type: 3}
-  - {fileID: 3082083685281676659, guid: 3ed8ceaf2117f4b45bc84b2151e924e6, type: 3}
+  - {fileID: 1770008726135051004, guid: 7951c4e3369dd194fb0673791ef0d016, type: 3}
