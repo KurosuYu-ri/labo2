@@ -27,7 +27,7 @@ public class WalkerGenerator : MonoBehaviour
     {
        // ranSpawn_ = Random.Range(0, 10);
 
-        if (peaple_ < 50)
+        if (peaple_ < 10)
         {
          GameObject item;
          int dice = Random.Range(0, 21);
@@ -41,7 +41,8 @@ public class WalkerGenerator : MonoBehaviour
                 //歩行者
             item = Instantiate(walker_);
          }
-            item.transform.position = spawn_[10].position;
+            item.transform.position = spawn_[0].position;
+            Debug.Log(item.transform.position);
 
             this.peaple_++; 
         }
@@ -51,6 +52,6 @@ public class WalkerGenerator : MonoBehaviour
 //その可変長配列をHumanScriptに渡せるようにゲッターを作成する。
     public Vector3 GetSpawn()
     {
-        return spawn_[ranSpawn_].position;
+        return spawn_[0].position;
     }
 }
