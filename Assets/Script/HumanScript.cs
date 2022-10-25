@@ -21,6 +21,7 @@ public class HumanScript : MonoBehaviour
     {
         // Nav Mesh Agent を取得します。
         myAgent = GetComponent<NavMeshAgent>();
+       
         SetDestination();
     }
 
@@ -44,6 +45,7 @@ public class HumanScript : MonoBehaviour
     }
     void RandomWander()
     {
+        
         //指定した目的地に障害物があるかどうか、そもそも到達可能なのかを確認して問題なければセットする。
         //pathPending 経路探索の準備できているかどうか
         if (!myAgent.pathPending)
