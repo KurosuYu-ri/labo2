@@ -15,18 +15,25 @@ public class HumanScript : MonoBehaviour
 
     public Transform[] waypoints;
     private int currentWaypointIndex;
-   
+
+    private WalkerGenerator walkerGenerator_;
+    private Vector3 spawn_;
 
     void Start()
     {
+        
         // Nav Mesh Agent を取得します。
         myAgent = GetComponent<NavMeshAgent>();
+        this.walkerGenerator_ = GameObject.Find("WalkerGenerator").GetComponent<WalkerGenerator>();
+        //スポーン位置の取得
+        spawn_ = this.walkerGenerator_.GetSpawn();
+
        
         SetDestination();
     }
 
     void Update()
-    { 
+    {
         // targetに向かって移動します。
         //if (myAgent.pathStatus != NavMeshPathStatus.PathInvalid)
         //{
@@ -64,12 +71,14 @@ public class HumanScript : MonoBehaviour
 
     void SetDestination()
     {
-       // int ran = Random.Range(0, 8);
+        // int ran = Random.Range(0, 8);
         //Vector3 randomPos = new Vector3(Random.Range(-wanderRange, wanderRange), 0, Random.Range(-wanderRange, wanderRange));
         //SamplePositionは設定した場所から5の範囲で最も近い距離のBakeされた場所を探す。
         //NavMesh.SamplePosition(randomPos, out navMeshHit, 5, 1);
         //navMeshAgent.destination = navMeshHit.position;
-        myAgent.SetDestination(waypoints[0].position);
+        this.transform.position = spawn_;
+        Debug.Log(spawn_);
+      //  myAgent.SetDestination(waypoints[0].position);
     }
     
 
@@ -82,4 +91,6 @@ public class HumanScript : MonoBehaviour
     {
         return hitCount;
     }
+
+    //可変長配列をWalkerGeneratorから取得してそれをセットする。
 }

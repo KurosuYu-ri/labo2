@@ -11,7 +11,11 @@ public class WalkerGenerator : MonoBehaviour
     /*  public GameObject walker;
       public GameObject walker;
       public GameObject walker;*/
-    private int peaple = 0;
+    private int peaple_ = 0;
+    private int ranSpawn_ = 0;
+    private List<Transform> spawnList_ = new List<Transform>();
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +25,9 @@ public class WalkerGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(peaple < 50)
+       // ranSpawn_ = Random.Range(0, 10);
+
+        if (peaple_ < 50)
         {
          GameObject item;
          int dice = Random.Range(0, 21);
@@ -35,13 +41,16 @@ public class WalkerGenerator : MonoBehaviour
                 //歩行者
             item = Instantiate(walker_);
          }
+            item.transform.position = spawn_[10].position;
 
-            int ranSpawn = Random.Range(0, 10);
-            item.transform.position = spawn_[ranSpawn].position;
-            this.peaple++;
-
+            this.peaple_++; 
         }
       
-     
+    }
+
+//その可変長配列をHumanScriptに渡せるようにゲッターを作成する。
+    public Vector3 GetSpawn()
+    {
+        return spawn_[ranSpawn_].position;
     }
 }
