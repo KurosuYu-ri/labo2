@@ -15,7 +15,7 @@ NavMeshProjectSettings:
     cost: 1
   - name: WalkRoad
     cost: 1
-  - name: 
+  - name: CrossWalk
     cost: 1
   - name: 
     cost: 1
