@@ -1,1 +1,12 @@
 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
+
+
+モブの出現
+
+ランダムで10カ所から出現させる
+
+そのランダムでスポーンしたところからデスポーン位置にいけるようにルートを10個ぐらい用意する
+
+デスポーン位置に付いたら削除
+
+

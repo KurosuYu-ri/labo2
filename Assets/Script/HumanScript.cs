@@ -26,10 +26,10 @@ public class HumanScript : MonoBehaviour
         myAgent = GetComponent<NavMeshAgent>();
         this.walkerGenerator_ = GameObject.Find("WalkerGenerator").GetComponent<WalkerGenerator>();
         //スポーン位置の取得
-        //spawn_ = this.walkerGenerator_.GetSpawn();
-
-
-       
+        spawn_ = this.walkerGenerator_.GetSpawn();
+        // waypoints = this.walkerGenerator_.GetRoot();
+        //Debug.Log(waypoints[0].position);
+        myAgent.Warp(transform.position);
         SetDestination();
     }
 
@@ -59,14 +59,14 @@ public class HumanScript : MonoBehaviour
         /*if (!myAgent.pathPending)
         {
             if (myAgent.remainingDistance <= myAgent.stoppingDistance)
-            {
+            {*/
                 //hasPath エージェントが経路を持っているかどうか
                 //navMeshAgent.velocity.sqrMagnitudeはスピード
                 if (!myAgent.hasPath || myAgent.velocity.sqrMagnitude == 0f)
                 {
                     SetDestination();
                 }
-            }
+           /* }
         }*/
     }
 
@@ -77,9 +77,10 @@ public class HumanScript : MonoBehaviour
         //SamplePositionは設定した場所から5の範囲で最も近い距離のBakeされた場所を探す。
         //NavMesh.SamplePosition(randomPos, out navMeshHit, 5, 1);
         //navMeshAgent.destination = navMeshHit.position;
-       // this.transform.position = spawn_;
-        //Debug.Log(spawn_);
-        myAgent.SetDestination(waypoints[0].position);
+        // this.transform.position = spawn_;
+        
+        int gopoints = 0;
+        myAgent.SetDestination(waypoints[gopoints].position);
     }
     
 

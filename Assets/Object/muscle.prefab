@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3423790857571118028}
   - component: {fileID: 3423790857571118024}
   m_Layer: 0
-  m_Name: Muscle
+  m_Name: muscle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.0100000035
-  m_Speed: 2.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -134,4 +134,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints:
-  - {fileID: 1770008726135051004, guid: 7951c4e3369dd194fb0673791ef0d016, type: 3}
+  - {fileID: 8223958894530006735, guid: 7951c4e3369dd194fb0673791ef0d016, type: 3}

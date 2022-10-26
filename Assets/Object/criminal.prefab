@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 423478099585338421}
   - component: {fileID: 423478099585338417}
   m_Layer: 0
-  m_Name: Criminal
+  m_Name: criminal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,4 +134,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints:
-  - {fileID: 1770008726135051004, guid: 7951c4e3369dd194fb0673791ef0d016, type: 3}
+  - {fileID: 7111959558330979671, guid: 7951c4e3369dd194fb0673791ef0d016, type: 3}

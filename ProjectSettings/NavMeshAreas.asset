@@ -6,13 +6,13 @@ NavMeshProjectSettings:
   serializedVersion: 2
   areas:
   - name: Walkable
-    cost: 1
+    cost: 5
   - name: Not Walkable
     cost: 1
   - name: Jump
-    cost: 2
+    cost: 5
   - name: Car
-    cost: 1
+    cost: 10
   - name: WalkRoad
     cost: 1
   - name: CrossWalk
