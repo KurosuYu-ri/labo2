@@ -7,6 +7,10 @@ public class WalkerGenerator : MonoBehaviour
     public GameObject criminal_;
     public GameObject walker_;
 
+
+    private HumanScript crimScript_;
+    private HumanScript walkScript_;
+
     public Transform[] spawn_;
     public Transform[] root0_0_;
 
@@ -16,14 +20,18 @@ public class WalkerGenerator : MonoBehaviour
       public GameObject walker;*/
     private int peaple_ = 0;
     private int ranSpawn_ = 0;
-    private List<Transform> rootList_ = new List<Transform>();
     private Transform[] root_;
+   
+    private bool walkerDethFlag_;
+    private bool criminalDethFlag_;
 
-    
+    private int maxPeaple_;
+
+    private GameObject item;
     // Start is called before the first frame update
     void Start()
     {
-        
+        maxPeaple_ = 10;
     }
 
     // Update is called once per frame
@@ -31,51 +39,36 @@ public class WalkerGenerator : MonoBehaviour
     {
         ranSpawn_ = Random.Range(0, 10);
 
-        //後からコメント　今は0固定
-        ranSpawn_ = 0;
-        if (peaple_ < 1)
-        {
-         GameObject item;
-         int dice = Random.Range(0, 21);
+      //最初の10人作成
+       if (peaple_ < maxPeaple_)
+       {
+        int dice = Random.Range(0, 21);
          if(dice % 2 == 0)
          {
-            //犯罪歩行
-            item = Instantiate(walker_);
+         //犯罪歩行
+          item = Instantiate(criminal_);
          }
          else 
          {
-                //歩行者
-            item = Instantiate(walker_);
+           //歩行者
+           item = Instantiate(walker_);
          }
-            item.transform.position = spawn_[ranSpawn_].position;
+           item.transform.position = spawn_[ranSpawn_].position;
            // Debug.Log(item.transform.position);
 
-            this.peaple_++;
-        }
+          this.peaple_++;
+       
+       }
 
-        //ランダムスポーンごとにルートを決める
-        /*switch (ranSpawn_)
+        //消えたらInstantiateしたい
+        if (peaple_ >= 10)
         {
-            case 0:
-                int ranRoot_ = Random.Range(0, 5);
-                //とりあえずこんかいは0固定
-                ranRoot_ = 0;
-                switch (ranRoot_)
-                {
-                    case 0:
-                        root_ = root0_0_;
-                        
-                        break;
+            this.crimScript_ = GameObject.Find("criminal").GetComponent<HumanScript>();
+            this.walkScript_ = GameObject.Find("musc").GetComponent<HumanScript>();
 
-                    default:
-                        break;
-                }
-
-
-
-                break;
+            this.walkerDethFlag_  = this.walkScript_.GetDethFlag();
+           //次回ここから
         }
-        */
 
     }
 

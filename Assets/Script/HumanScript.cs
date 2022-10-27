@@ -19,6 +19,12 @@ public class HumanScript : MonoBehaviour
     private WalkerGenerator walkerGenerator_;
     private Vector3 spawn_;
 
+    private string objName;
+
+    string dethpawn_;
+
+    private bool dethFlag_;
+    
     void Start()
     {
         
@@ -35,6 +41,7 @@ public class HumanScript : MonoBehaviour
 
     void Update()
     {
+        dethFlag_ = false;
         // targetに向かって移動します。
         //if (myAgent.pathStatus != NavMeshPathStatus.PathInvalid)
         //{
@@ -48,7 +55,7 @@ public class HumanScript : MonoBehaviour
         myAgent.SetDestination(finaltarget.transform.position);
         
         }*/
-      
+
         
     }
     void RandomWander()
@@ -56,37 +63,44 @@ public class HumanScript : MonoBehaviour
         
         //指定した目的地に障害物があるかどうか、そもそも到達可能なのかを確認して問題なければセットする。
         //pathPending 経路探索の準備できているかどうか
-        /*if (!myAgent.pathPending)
+        if (!myAgent.pathPending)
         {
             if (myAgent.remainingDistance <= myAgent.stoppingDistance)
-            {*/
+            {
                 //hasPath エージェントが経路を持っているかどうか
                 //navMeshAgent.velocity.sqrMagnitudeはスピード
                 if (!myAgent.hasPath || myAgent.velocity.sqrMagnitude == 0f)
                 {
                     SetDestination();
                 }
-           /* }
-        }*/
+           }
+        }
     }
 
     void SetDestination()
     {
-        // int ran = Random.Range(0, 8);
+         int ran = Random.Range(0, 12);
         //Vector3 randomPos = new Vector3(Random.Range(-wanderRange, wanderRange), 0, Random.Range(-wanderRange, wanderRange));
         //SamplePositionは設定した場所から5の範囲で最も近い距離のBakeされた場所を探す。
         //NavMesh.SamplePosition(randomPos, out navMeshHit, 5, 1);
         //navMeshAgent.destination = navMeshHit.position;
         // this.transform.position = spawn_;
-        
-        int gopoints = 0;
-        myAgent.SetDestination(waypoints[gopoints].position);
+        dethpawn_ = waypoints[ran].name;
+        Debug.Log(dethpawn_);
+        myAgent.SetDestination(waypoints[ran].position);
     }
     
 
     void OnTriggerEnter(Collider col)
     {
-        myAgent.speed = 0.0f;
+        objName = col.gameObject.name;
+        Debug.Log(objName);
+        if(objName.Contains("Cube")&&dethpawn_ == objName)
+        {
+            dethFlag_ = true;
+          Destroy(this.gameObject);
+        }
+       
     }
 
     public int GethitCount()
@@ -94,5 +108,10 @@ public class HumanScript : MonoBehaviour
         return hitCount;
     }
 
+ 
+    public bool GetDethFlag()
+    {
+        return dethFlag_;
+    }
     //可変長配列をWalkerGeneratorから取得してそれをセットする。
 }
