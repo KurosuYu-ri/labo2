@@ -86,7 +86,7 @@ public class HumanScript : MonoBehaviour
         //navMeshAgent.destination = navMeshHit.position;
         // this.transform.position = spawn_;
         dethpawn_ = waypoints[ran].name;
-        Debug.Log(dethpawn_);
+       // Debug.Log(dethpawn_);
         myAgent.SetDestination(waypoints[ran].position);
     }
     
@@ -94,10 +94,9 @@ public class HumanScript : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         objName = col.gameObject.name;
-        Debug.Log(objName);
+        //Debug.Log(objName);
         if(objName.Contains("Cube")&&dethpawn_ == objName)
         {
-            dethFlag_ = true;
           Destroy(this.gameObject);
         }
        
