@@ -24,7 +24,11 @@ public class HumanScript : MonoBehaviour
     string dethpawn_;
 
     private bool dethFlag_;
-    
+
+    private int ran;
+
+    private float count;
+
     void Start()
     {
         
@@ -41,7 +45,7 @@ public class HumanScript : MonoBehaviour
 
     void Update()
     {
-        dethFlag_ = false;
+
         // targetに向かって移動します。
         //if (myAgent.pathStatus != NavMeshPathStatus.PathInvalid)
         //{
@@ -79,7 +83,7 @@ public class HumanScript : MonoBehaviour
 
     void SetDestination()
     {
-         int ran = Random.Range(0, 12);
+         ran = Random.Range(0, 12);
         //Vector3 randomPos = new Vector3(Random.Range(-wanderRange, wanderRange), 0, Random.Range(-wanderRange, wanderRange));
         //SamplePositionは設定した場所から5の範囲で最も近い距離のBakeされた場所を探す。
         //NavMesh.SamplePosition(randomPos, out navMeshHit, 5, 1);
@@ -95,11 +99,36 @@ public class HumanScript : MonoBehaviour
     {
         objName = col.gameObject.name;
         //Debug.Log(objName);
-        if(objName.Contains("Cube")&&dethpawn_ == objName)
+        if(objName.Contains("DethPawn")&&dethpawn_ == objName)
         {
           Destroy(this.gameObject);
         }
        
+    }
+
+    void OnTriggerStay(Collider collider)
+    {
+        objName = collider.gameObject.name;
+        //Debug.Log(objName);
+
+        Debug.Log(objName);
+
+        //赤だったら
+        if (objName.Contains("CrossWalkStopper"))
+        {
+            //とめる
+            myAgent.isStopped = true;
+
+            count = Time.deltaTime;
+        }
+        //青になったら
+        //再開する
+
+        if(count > 5.0)
+        {
+            myAgent.isStopped = false;
+        }
+        
     }
 
     public int GethitCount()
@@ -111,6 +140,11 @@ public class HumanScript : MonoBehaviour
     public bool GetDethFlag()
     {
         return dethFlag_;
+    }
+
+    public int GetRan()
+    {
+        return ran;
     }
     //可変長配列をWalkerGeneratorから取得してそれをセットする。
 }

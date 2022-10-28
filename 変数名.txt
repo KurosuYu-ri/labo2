@@ -1,0 +1,26 @@
+信号無視犯
+Criminal
+
+筋肉ムキムキの信号無視犯
+Criminal Macho
+
+スピード婆
+Elderly
+
+一般人
+Inocent
+
+一般マッチョ
+Inocent Macho
+
+ポイ捨て犯
+Litter
+
+ポイ捨てマッチョ
+Litter Macho
+
+迷子猫
+Cat
+
+猫を探している人
+Cat Owner
