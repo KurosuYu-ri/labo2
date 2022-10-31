@@ -17,10 +17,14 @@ public class WalkerGenerator : MonoBehaviour
     private GameObject item;
 
     private GameObject[] humanObject_;
+
+    float elapsedTime;
+
+    bool spawnFlag_ = false;
     // Start is called before the first frame update
     void Start()
     {
-        maxPeaple_ = 10;
+        maxPeaple_ = 15;
     }
 
     // Update is called once per frame
@@ -29,26 +33,39 @@ public class WalkerGenerator : MonoBehaviour
         ranSpawn_ = Random.Range(0, 10);
 
       //最初の10人作成
-       if (peaple_ < maxPeaple_)
+       if (peaple_ < 10)
        {
             Spawn();
-            // Debug.Log(item.transform.position);
-
             this.peaple_++;
-       
-       }
-       else
+            // Debug.Log(item.transform.position);  
+        }
+       else if(peaple_ <= maxPeaple_)
        { 
           humanObject_ = GameObject.FindGameObjectsWithTag("Human");
 
-            if (humanObject_.Length < 10)
+            if (humanObject_.Length < peaple_)
             {
-                Spawn();
+                spawnFlag_ = true;
+                    Spawn();
+               
             }
         }
-       
 
-      
+       if(spawnFlag_ == true || humanObject_.Length <= maxPeaple_)
+        {
+            //10秒カウント
+            elapsedTime += Time.deltaTime;
+            Debug.Log(humanObject_.Length);
+           // Debug.Log(elapsedTime);
+            if (elapsedTime > 10.0f)
+            {
+                Spawn();
+                this.peaple_++;
+                elapsedTime = 0;
+            }
+        }
+        
+
 
     }
 
@@ -73,5 +90,7 @@ public class WalkerGenerator : MonoBehaviour
             item = Instantiate(walker_);
         }
         item.transform.position = spawn_[ranSpawn_].position;
+      
+       
     }
 }

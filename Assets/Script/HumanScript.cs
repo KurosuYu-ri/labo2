@@ -111,10 +111,10 @@ public class HumanScript : MonoBehaviour
         objName = collider.gameObject.name;
         //Debug.Log(objName);
 
-        Debug.Log(objName);
+        //Debug.Log(objName);
 
         //赤だったら
-        if (objName.Contains("CrossWalkStopper"))
+      /*  if (objName.Contains("CrossWalkStopper"))
         {
             //とめる
             myAgent.isStopped = true;
@@ -127,7 +127,7 @@ public class HumanScript : MonoBehaviour
         if(count > 5.0)
         {
             myAgent.isStopped = false;
-        }
+        }*/
         
     }
 
