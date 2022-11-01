@@ -4,64 +4,74 @@ using UnityEngine;
 
 public class WalkerGenerator : MonoBehaviour
 {
-    public GameObject criminal_;
-    public GameObject walker_;
+    //メンバ変数
+    public GameObject criminal_;//犯罪者
+    public GameObject inocent_;//一般人
+    public Transform[] spawn_;//スポーン位置
+    private int human_ = 0;//人数
+    private int ranSpawn_ = 0;//スポーン位置を決める乱数
+    private GameObject spawnHuman_;//人を入れる変数
 
-    public Transform[] spawn_;
+    private GameObject[] humanTag_;//HumanTagを数える変数
 
-    private int peaple_ = 0;
-    private int ranSpawn_ = 0;
+    private float elapsedTime_;//計測タイム
 
-    private int maxPeaple_;
-
-    private GameObject item;
-
-    private GameObject[] humanObject_;
-
-    float elapsedTime;
+    float reSpawn_ = 0.0f;
 
     bool spawnFlag_ = false;
-    // Start is called before the first frame update
+
+    //定数
+    const int FIRSTPERSON = 10;
+    const int MAXPARSON = 15;
+   
     void Start()
     {
-        maxPeaple_ = 15;
+        reSpawn_ = Random.Range(5.0f, 10.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        ranSpawn_ = Random.Range(0, 10);
+        humanTag_ = GameObject.FindGameObjectsWithTag("Human");
+       
 
       //最初の10人作成
-       if (peaple_ < 10)
+       if (human_ < FIRSTPERSON)
        {
             Spawn();
-            this.peaple_++;
-            // Debug.Log(item.transform.position);  
+            this.human_++;
+            // Debug.Log(spawnHuman_.transform.position);  
         }
-       else if(peaple_ <= maxPeaple_)
-       { 
-          humanObject_ = GameObject.FindGameObjectsWithTag("Human");
 
-            if (humanObject_.Length < peaple_)
+       else if(human_ <= MAXPARSON)
+       { 
+            if (humanTag_.Length < human_)
             {
                 spawnFlag_ = true;
-                    Spawn();
-               
+                    Spawn();  
             }
         }
-
-       if(spawnFlag_ == true || humanObject_.Length <= maxPeaple_)
+        Debug.Log(humanTag_.Length);
+        if (spawnFlag_ == true && humanTag_.Length < MAXPARSON)
         {
-            //10秒カウント
-            elapsedTime += Time.deltaTime;
-            Debug.Log(humanObject_.Length);
-           // Debug.Log(elapsedTime);
-            if (elapsedTime > 10.0f)
+            //秒数カウント
+            elapsedTime_ += Time.deltaTime;
+            
+           // Debug.Log(elapsedTime_);
+           //カウントしている時間が再スポーンする時間より大きくなったら
+            if (elapsedTime_ > reSpawn_)
             {
+                //再スポーン
                 Spawn();
-                this.peaple_++;
-                elapsedTime = 0;
+
+                //次の再スポーンまでの時間を設定
+                reSpawn_ = Random.Range(5.0f, 10.0f);
+
+                //再スポーンしたら人数を増やす
+                this.human_++;
+
+                //カウントしている時間をリセット
+                elapsedTime_ = 0;
             }
         }
         
@@ -78,18 +88,18 @@ public class WalkerGenerator : MonoBehaviour
    private void Spawn()
     {
         int dice = Random.Range(0, 21);
-
+        ranSpawn_ = Random.Range(0, 10);
         if (dice % 2 == 0)
         {
             //犯罪歩行
-            item = Instantiate(criminal_);
+            spawnHuman_ = Instantiate(criminal_);
         }
         else
         {
             //歩行者
-            item = Instantiate(walker_);
+            spawnHuman_ = Instantiate(inocent_);
         }
-        item.transform.position = spawn_[ranSpawn_].position;
+        spawnHuman_.transform.position = spawn_[ranSpawn_].position;
       
        
     }
