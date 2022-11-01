@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Triangularity/ColorfulCity/Scenes/TitleScene.unity
+    guid: 77f62bbeaa1d47545b0f3c2a353b9ad8
+  - enabled: 1
+    path: Assets/Triangularity/ColorfulCity/Scenes/GameStartScene.unity
+    guid: 80cc18f3a8b5e004fad4bebe5cab1054
+  - enabled: 1
+    path: Assets/Triangularity/ColorfulCity/Scenes/City (Main scene).unity
+    guid: 1ca82ac5183a74646976d29b08b82287
+  - enabled: 1
+    path: Assets/Triangularity/ColorfulCity/Scenes/ResultScene.unity
+    guid: 3b37f93081628b1479012a75dad9f086
   m_configObjects: {}
