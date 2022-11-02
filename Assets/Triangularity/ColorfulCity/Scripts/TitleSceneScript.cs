@@ -7,10 +7,10 @@ public class TitleSceneScript : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private Rigidbody2D rbody2D;
+    //private Rigidbody2D rbody2D;
     void Start()
     {
-        rbody2D = GetComponent<Rigidbody2D>();
+        //rbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame

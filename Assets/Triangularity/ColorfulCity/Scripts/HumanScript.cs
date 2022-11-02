@@ -8,58 +8,45 @@ public class HumanScript : MonoBehaviour
 {
     // 目的地となるGameObjectをセットします。
     //public Target target;
-    private NavMeshAgent myAgent;
+    private NavMeshAgent myAgent;//ナビメッシュエージェント
     //public GameObject target;
     //public GameObject finaltarget;
-    private int hitCount;
+ 
 
-    public Transform[] waypoints;
-    private int currentWaypointIndex;
+    public Transform[] destination_;//行き先
 
-    private WalkerGenerator walkerGenerator_;
-    private Vector3 spawn_;
+    private WalkerGenerator walkerGenerator_;//スポーン用のスクリプト
+    private Vector3 spawn_; //スポーン位置
 
-    private string objName;
+    private string objName;//オブジェクト名
 
-    string dethpawn_;
+    string dethpawn_;//デスポーン位置
 
-    private bool dethFlag_;
+    private bool dethFlag_;//死んだかフラグ
 
-    private int ran;
-
-    private float count;
+    private int dethRan_;//デスポーン位置を決める乱数
 
     void Start()
     {
         
         // Nav Mesh Agent を取得します。
         myAgent = GetComponent<NavMeshAgent>();
+
+        //スクリプトの取得
         this.walkerGenerator_ = GameObject.Find("WalkerGenerator").GetComponent<WalkerGenerator>();
+
         //スポーン位置の取得
         spawn_ = this.walkerGenerator_.GetSpawn();
-        // waypoints = this.walkerGenerator_.GetRoot();
-        //Debug.Log(waypoints[0].position);
+        
+        //キャラクターをワープさせて位置調整
         myAgent.Warp(transform.position);
+
+        //行き先決定
         SetDestination();
     }
 
     void Update()
     {
-
-        // targetに向かって移動します。
-        //if (myAgent.pathStatus != NavMeshPathStatus.PathInvalid)
-        //{
-        //    myAgent.SetDestination(target.transform.position);
-        //}
-
-        //信号が青になったらtargetを変更する
-        /*if(myAgent.remainingDistance <= myAgent.stoppingDistance)
-        {
-              //次のtargetに移動
-        myAgent.SetDestination(finaltarget.transform.position);
-        
-        }*/
-
         
     }
     void RandomWander()
@@ -75,68 +62,42 @@ public class HumanScript : MonoBehaviour
                 //navMeshAgent.velocity.sqrMagnitudeはスピード
                 if (!myAgent.hasPath || myAgent.velocity.sqrMagnitude == 0f)
                 {
+                    //行き先決定
                     SetDestination();
                 }
            }
         }
     }
 
+    //行き先決定
     void SetDestination()
     {
-         ran = Random.Range(0, 12);
-        //Vector3 randomPos = new Vector3(Random.Range(-wanderRange, wanderRange), 0, Random.Range(-wanderRange, wanderRange));
-        //SamplePositionは設定した場所から5の範囲で最も近い距離のBakeされた場所を探す。
-        //NavMesh.SamplePosition(randomPos, out navMeshHit, 5, 1);
-        //navMeshAgent.destination = navMeshHit.position;
-        // this.transform.position = spawn_;
-        dethpawn_ = waypoints[ran].name;
+        //ランダムで行き先を決める
+        dethRan_ = Random.Range(0, 12);
+
+        //デスポーン位置の名前を入れる
+        dethpawn_ = destination_[dethRan_].name;
        // Debug.Log(dethpawn_);
-        myAgent.SetDestination(waypoints[ran].position);
+       //デスポーン位置へ移動させる
+        myAgent.SetDestination(destination_[dethRan_].position);
     }
     
-
+    //辺り判定
     void OnTriggerEnter(Collider col)
     {
+        //当たった物の名前取得
         objName = col.gameObject.name;
         //Debug.Log(objName);
+        //デスポーン位置に付いたら
         if(objName.Contains("DethPawn")&&dethpawn_ == objName)
         {
+            //デスポーン処理
           Destroy(this.gameObject);
         }
        
     }
 
-    void OnTriggerStay(Collider collider)
-    {
-        objName = collider.gameObject.name;
-        //Debug.Log(objName);
-
-        //Debug.Log(objName);
-
-        //赤だったら
-      /*  if (objName.Contains("CrossWalkStopper"))
-        {
-            //とめる
-            myAgent.isStopped = true;
-
-            count = Time.deltaTime;
-        }
-        //青になったら
-        //再開する
-
-        if(count > 5.0)
-        {
-            myAgent.isStopped = false;
-        }*/
-        
-    }
-
-    public int GethitCount()
-    {
-        return hitCount;
-    }
-
- 
+  
     public bool GetDethFlag()
     {
         return dethFlag_;
@@ -144,7 +105,7 @@ public class HumanScript : MonoBehaviour
 
     public int GetRan()
     {
-        return ran;
+        return dethRan_;
     }
     //可変長配列をWalkerGeneratorから取得してそれをセットする。
 }
