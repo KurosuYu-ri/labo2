@@ -9,17 +9,16 @@ public class WalkerGenerator : MonoBehaviour
     public GameObject inocent_;//一般人
     public GameObject littering_;//ポイ捨て犯
     public Transform[] spawn_;//スポーン位置
+    public GameObject dust_;
+
+
     private int human_ = 0;//人数
     private int ranSpawn_ = 0;//スポーン位置を決める乱数
     private GameObject spawnHuman_;//人を入れる変数
-
     private GameObject[] humanTag_;//HumanTagを数える変数
-
     private float elapsedTime_;//計測タイム
-
-    float reSpawn_ = 0.0f;//再スポーンまでの乱数
-
-    bool spawnFlag_ = false;//乱数の秒数ごとに人数を増やすかフラグ
+    private float reSpawn_ = 0.0f;//再スポーンまでの乱数
+    private bool spawnFlag_ = false;//乱数の秒数ごとに人数を増やすかフラグ
 
     //定数
     const int FIRSTPERSON = 10;
@@ -119,5 +118,10 @@ public class WalkerGenerator : MonoBehaviour
         spawnHuman_.transform.position = spawn_[ranSpawn_].position;
       
        
+    }
+
+    public GameObject GetDust()
+    {
+        return dust_;
     }
 }
