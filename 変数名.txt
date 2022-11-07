@@ -24,3 +24,35 @@ Cat
 
 猫を探している人
 Cat Owner
+
+
+//スクリプト名
+人の基本設定スクリプト
+HumanScript
+
+人のスポーンデスポーン管理
+WalkerGenerator
+
+
+
+シーン名
+タイトル
+TitleScene
+　※スクリプト　TitleSceneScript
+
+ゲームスタートシーン
+GameStartScene
+　※スクリプト　GameStartSceneScript
+
+ロード画面
+LoadScene
+　※スクリプト　LoadSceneScript
+
+ゲーム画面
+GameScene
+　※スクリプトはキャラクターごとに設定
+
+リザルト画面
+ResultScene
+
+

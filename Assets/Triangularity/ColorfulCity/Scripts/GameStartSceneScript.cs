@@ -22,6 +22,6 @@ public class GameStartSceneScript : MonoBehaviour
     {
        // Debug.Log("click ok");
        //ƒQ[ƒ€ƒV[ƒ“‚Ö‘JˆÚ
-        SceneManager.LoadScene("City (Main scene)");
+        SceneManager.LoadScene("LoadScene");
     }
 }
