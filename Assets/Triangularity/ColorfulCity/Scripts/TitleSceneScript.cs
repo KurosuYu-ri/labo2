@@ -21,7 +21,7 @@ public class TitleSceneScript : MonoBehaviour
 
     public void OnClickButton()
     {
-        Debug.Log("click ok");
+        //Debug.Log("click ok");
         SceneManager.LoadScene("GameStartScene");
     }
     
