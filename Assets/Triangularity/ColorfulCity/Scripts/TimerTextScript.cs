@@ -15,7 +15,7 @@ public class TimerTextScript : MonoBehaviour
 
     void Start()
     {
-        CountDownTime = 30.0f;    // カウントダウン開始秒数をセット
+        CountDownTime = 300.0f;    // カウントダウン開始秒数をセット
     }
 
     // Update is called once per frame

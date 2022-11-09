@@ -16,6 +16,8 @@ public class HumanScript : MonoBehaviour
     public Transform[] destination_;//行き先
 
     private WalkerGenerator walkerGenerator_;//スポーン用のスクリプト
+    private GameDirector gameDirector_;//信号機の切り替えヲ制御しているスクリプト
+
     private Vector3 spawn_; //スポーン位置
 
     private string objName;//オブジェクト名
@@ -26,6 +28,8 @@ public class HumanScript : MonoBehaviour
 
     private int dethRan_;//デスポーン位置を決める乱数
 
+    private int color;
+
     void Start()
     {
         
@@ -34,6 +38,9 @@ public class HumanScript : MonoBehaviour
 
         //スクリプトの取得
         this.walkerGenerator_ = GameObject.Find("WalkerGenerator").GetComponent<WalkerGenerator>();
+
+        //スクリプトの取得
+        this.gameDirector_ = GameObject.Find("SignalDirector").GetComponent<GameDirector>();
 
         //スポーン位置の取得
         spawn_ = this.walkerGenerator_.GetSpawn();
@@ -47,7 +54,11 @@ public class HumanScript : MonoBehaviour
 
     void Update()
     {
-        
+         color = this.gameDirector_.GetCarSignalB();
+        if(myAgent.isStopped == true && color == 0 || color == 1)
+        {
+            myAgent.isStopped = false;
+        }
     }
     void RandomWander()
     {
@@ -82,19 +93,37 @@ public class HumanScript : MonoBehaviour
         myAgent.SetDestination(destination_[dethRan_].position);
     }
     
-    //辺り判定
+    //当たり判定
     void OnTriggerEnter(Collider col)
     {
         //当たった物の名前取得
         objName = col.gameObject.name;
         //Debug.Log(objName);
         //デスポーン位置に付いたら
-        if(objName.Contains("DethPawn")&&dethpawn_ == objName)
+        if (objName.Contains("DethPawn") && dethpawn_ == objName)
         {
             //デスポーン処理
-          Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
-       
+
+    }
+
+    void OnTriggerStay(Collider col)
+    {
+        if (objName.Contains("CrossWalkStopper"))
+        {
+
+            Debug.Log(color);
+            if (color == 0 || color == 1)
+            {
+                this.myAgent.isStopped = false;
+            }
+            else
+            {
+                this.myAgent.isStopped = true;
+            }
+
+        }
     }
 
   
