@@ -27,7 +27,7 @@ public class LitteringScript : MonoBehaviour
         Transform myTrans = this.transform;
 
         pos = myTrans.position;
-        pos.y = 0.05f;
+        pos.y = 0.15f;
         if(time > 8.0f)
         {
             dust = Instantiate(dustObject_);
