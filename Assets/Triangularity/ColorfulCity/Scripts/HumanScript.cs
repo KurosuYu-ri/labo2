@@ -30,6 +30,8 @@ public class HumanScript : MonoBehaviour
 
     private int color;
 
+    private float speed = 0.0f;
+
     void Start()
     {
         
@@ -50,15 +52,28 @@ public class HumanScript : MonoBehaviour
 
         //行き先決定
         SetDestination();
+
+        speed = myAgent.speed;
     }
 
     void Update()
     {
+
+        if(Vector3.Distance(myAgent.steeringTarget,transform.position) < 5.0f)
+        {
+            myAgent.speed = 1.0f;
+        }
+        else
+        {
+            myAgent.speed = speed;
+        }
          color = this.gameDirector_.GetCarSignalB();
         if(myAgent.isStopped == true && color == 0 || color == 1)
         {
             myAgent.isStopped = false;
         }
+
+       
     }
     void RandomWander()
     {
@@ -88,9 +103,11 @@ public class HumanScript : MonoBehaviour
 
         //デスポーン位置の名前を入れる
         dethpawn_ = destination_[dethRan_].name;
-       // Debug.Log(dethpawn_);
+        // Debug.Log(dethpawn_);
+
+        myAgent.destination = destination_[dethRan_].position;
        //デスポーン位置へ移動させる
-        myAgent.SetDestination(destination_[dethRan_].position);
+       myAgent.SetDestination(destination_[dethRan_].position);
     }
     
     //当たり判定
@@ -110,17 +127,31 @@ public class HumanScript : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
+        Debug.Log(color);
         if (objName.Contains("CrossWalkStopper"))
         {
-
-            Debug.Log(color);
-            if (color == 0 || color == 1)
+           
+            if (color == 1)
+            {
+                
+                if (objName.Contains("Pedestrian"))
+                {
+                    this.myAgent.isStopped = false;
+                }
+                else
+                {
+                    this.myAgent.isStopped = true;
+                    this.myAgent.speed = 0.0f;
+                }
+            }
+            else if (color == 0)
             {
                 this.myAgent.isStopped = false;
             }
             else
             {
                 this.myAgent.isStopped = true;
+                this.myAgent.speed = 0.0f;
             }
 
         }

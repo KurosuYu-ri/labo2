@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8566931107397976363}
   - component: {fileID: 2180420641625911931}
   - component: {fileID: 4579167985952368757}
+  - component: {fileID: 5587074259487158159}
   m_Layer: 0
   m_Name: Littering
   m_TagString: Human
@@ -97,9 +98,9 @@ SphereCollider:
   m_GameObject: {fileID: 8800794130343617170}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.02
+  m_Radius: 0.015
   m_Center: {x: 0.0000000013969839, y: 0.00004910864, z: -0.000024552457}
 --- !u!195 &8566931107397976367
 NavMeshAgent:
@@ -176,3 +177,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c45321c06ee20478c737b760c6be65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &5587074259487158159
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800794130343617170}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.010024432
+  m_Height: 0.05
+  m_Direction: 1
+  m_Center: {x: 0.0000000013969838, y: 0.000049108636, z: -0.000024552455}
